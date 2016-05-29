@@ -1,5 +1,5 @@
 
-DEBUG = true
+DEBUG = false
 
 class @Counter
 
@@ -31,3 +31,7 @@ class @Counter
 
     sub.onStop ->
       Meteor.clearTimeout handler
+
+
+  publish: (sub) =>
+    @_publishCursor(sub)
