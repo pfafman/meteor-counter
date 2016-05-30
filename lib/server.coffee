@@ -1,12 +1,15 @@
 
 DEBUG = false
 
+DEFAULT_INTERVAL = 5 # Seconds
+
+
 class @Counter
 
   _collectionName: '_counters'
 
 
-  constructor: (@name, @cursor, @interval = 3*1000) ->
+  constructor: (@name, @cursor, @interval = DEFAULT_INTERVAL) ->
 
 
   _getCollectionName: =>
@@ -17,19 +20,20 @@ class @Counter
   _publishCursor: (sub) =>
     count = @cursor.count()
 
-    console.log("Counter publishCursor", @_collectionName, @name, count) if DEBUG
+    console.log("Counter publishCursor", @name, count) if DEBUG
     
     sub.added @_collectionName, @name,
       count: count
     
     handler = Meteor.setInterval =>
       count = @cursor.count()
-      console.log("Counter publishCursor update", @_collectionName, @name, count) if DEBUG
+      console.log("Counter publishCursor update", @name, count) if DEBUG
       sub.changed @_collectionName, @name,
         count: count
-    , @interval
+    , @interval*1000
 
-    sub.onStop ->
+    sub.onStop =>
+      console.log("Counter onStop", @name) if DEBUG
       Meteor.clearTimeout handler
 
 
