@@ -12,7 +12,7 @@ class @Counter
   constructor: (@name, @cursor, @interval = DEFAULT_INTERVAL) ->
 
 
-  _getCollectionName: =>
+  _getCollectionName: ->
     console.log("Counter _getCollectionName", @name) if DEBUG
     "counter-#{@name}"
 
@@ -30,7 +30,7 @@ class @Counter
       console.log("Counter publishCursor update", @name, count) if DEBUG
       sub.changed @_collectionName, @name,
         count: count
-    , @interval*1000
+    , @interval * 1000
 
     sub.onStop =>
       console.log("Counter onStop", @name) if DEBUG
