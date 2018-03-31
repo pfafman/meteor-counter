@@ -1,12 +1,11 @@
 Package.describe({
   name: "pfafman:counter",
   summary: "Better way to count large collections",
-  version: "1.0.0"
+  version: "1.0.1"
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom("1.3.1");
-
+  
   api.use([
     'coffeescript',
     'mongo'
