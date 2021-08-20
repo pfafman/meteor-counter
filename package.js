@@ -1,7 +1,7 @@
 Package.describe({
   name: "pfafman:counter",
   summary: "Better way to count large collections",
-  version: "1.0.1"
+  version: "1.0.2"
 });
 
 Package.onUse(function (api) {
@@ -11,13 +11,13 @@ Package.onUse(function (api) {
     'mongo'
   ]);
 
-  api.add_files(
+  api.addFiles(
     [
     'lib/client.coffee'
     ]
     , 'client');
 
-  api.add_files(
+  api.addFiles(
     [
     'lib/server.coffee'
     ]
