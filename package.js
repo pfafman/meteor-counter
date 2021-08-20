@@ -7,8 +7,8 @@ Package.describe({
 Package.onUse(function (api) {
   
   api.use([
-    'coffeescript',
-    'mongo'
+    'coffeescript@2.4.0',
+    'mongo@1.12.0'
   ]);
 
   api.addFiles(
