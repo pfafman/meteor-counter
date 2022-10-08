@@ -9,7 +9,7 @@ class @Counter
   _collectionName: '_counters'
 
 
-  constructor: (@name, @cursor, @interval = DEFAULT_INTERVAL) ->
+  constructor: (@name, @cursor, @options, @interval = DEFAULT_INTERVAL) ->
 
 
   _getCollectionName: ->
@@ -17,8 +17,20 @@ class @Counter
     "counter-#{@name}"
 
 
+  _counter: =>
+    if @options?.countField
+      count = 0
+      @cursor.forEach (rec) =>
+        count += rec[@options.countField]
+      count
+    else
+      @cursor.count()
+
+
+
   _publishCursor: (sub) =>
-    count = @cursor.count()
+
+    count = @_counter()
 
     console.log("Counter publishCursor", @name, count) if DEBUG
     
@@ -26,7 +38,7 @@ class @Counter
       count: count
     
     handler = Meteor.setInterval =>
-      count = @cursor.count()
+      count = @_counter()
       console.log("Counter publishCursor update", @name, count) if DEBUG
       sub.changed @_collectionName, @name,
         count: count
