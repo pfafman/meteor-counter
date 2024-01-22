@@ -18,13 +18,19 @@ class @Counter
 
 
   _counter: =>
-    if @options?.countField
-      count = 0
-      @cursor.forEach (rec) =>
-        count += rec[@options.countField]
-      count
-    else
-      @cursor.count()
+    try
+      if @options?.countField
+        count = 0
+        @cursor.forEach (rec) =>
+          count += rec[@options.countField]
+        count
+      else
+        @cursor.count()
+    catch e
+      console.log("Counter Error on cursor count, #{@name}", e)
+      0
+    
+    
 
 
 
