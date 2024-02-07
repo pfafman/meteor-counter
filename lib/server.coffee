@@ -27,7 +27,7 @@ class @Counter
       else
         @cursor.count()
     catch e
-      console.log("Counter Error on cursor count, #{@name}", e)
+      console.log("Counter Error on cursor count, #{@name}", @options, e)
       0
     
     

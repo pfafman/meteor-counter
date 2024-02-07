@@ -1,7 +1,7 @@
 Package.describe({
   name: "pfafman:counter",
   summary: "Better way to count large collections",
-  version: "1.0.4"
+  version: "1.0.5"
 });
 
 Package.onUse(function (api) {
